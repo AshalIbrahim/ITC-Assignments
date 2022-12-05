@@ -1,0 +1,165 @@
+Q1) option d
+Q2) 132 combinations using sir waseem's formula of counting the combinations in a binary search tree
+Q3) implemented in java
+Q4) class Node {
+    int data;
+    Node left, right;
+ 
+    Node(int d)
+    {
+        data = d;
+        left = right = null;
+    }
+}
+ 
+class BinaryTree {
+ 
+    static Node head;
+    Node insert(Node node, int data)
+    {
+        if (node == null) {
+            return (new Node(data));
+        }
+        else {
+
+            if (data <= node.data) {
+                node.left = insert(node.left, data);
+            }
+            else {
+                node.right = insert(node.right, data);
+            }
+            return node;
+        }
+    }
+//this is the modified function that we’ll be using for min value that was asked in the question
+
+    int minimumvalue(Node node)
+    {
+        Node thisnode = node;
+        while (thisnode.left != null) {
+            thisnode = thisnode.left;
+        }
+        return (thisnode.data);
+    }
+   //this is for maximum value
+ int maximumvalue(Node node)
+    {
+        Node thisnode = node;
+        while (thisnode.right != null) {
+            thisnode = thisnode.right;
+        }
+        return (thisnode.data);
+    }
+
+public static void main(String[] args)
+    {
+        BinaryTree tree = new BinaryTree();
+        Node root = null;
+        root = tree.insert(root, 4);
+        tree.insert(root, 2);
+        tree.insert(root, 1);
+        tree.insert(root, 3);
+        tree.insert(root, 6);
+        tree.insert(root, 5);
+ 
+          // Function call
+        System.out.println("Minimum value of BST is "
+                           + tree.minimumvalue(root)+tree.maximumvalue(root));
+    }
+}
+
+Q5) class Node {
+ 
+    int data;
+    Node left, right;
+ 
+    Node(int d)
+    {
+        data = d;
+        left = right = null;
+    }
+}
+ 
+class BinaryTree {
+ 
+    Node root;
+     int Ceiling(Node node, int input)
+    {
+        if (node == null) {
+            return -1;
+        }
+         if (node.data == input) {
+            return node.data;
+        }
+        if (node.data < input) {
+            return Ceiling(node.right, input);
+        }
+ 
+        int ceil = Ceiling(node.left, input);
+ 
+        return (ceil >= input) ? ceil : node.data;
+    }
+    public static void main(String[] args)
+    {
+        BinaryTree tree = new BinaryTree();
+        tree.root = new Node(8);
+        tree.root.left = new Node(4);
+        tree.root.right = new Node(12);
+        tree.root.left.left = new Node(2);
+        tree.root.left.right = new Node(6);
+        tree.root.right.left = new Node(10);
+        tree.root.right.right = new Node(14);
+        for (int i = 0; i < 16; i++) {
+ 
+            System.out.println(i + " "
+                               + tree.Ceiling(tree.root, i));
+        }
+    }
+}
+Q6) public class BST<Key extends Comparable<Key>, Value> {
+        public int size() {
+          return size(root); }
+         private int size(Node a) {
+          if (a == null) return 0;
+         else return a.size; }
+}
+
+Q7) class Node {
+ 
+    int data;
+    Node left, right;
+ 
+    Node(int d) {
+        data = d;
+        left = right = null;
+    }
+}
+ 
+class BinaryTree {
+     
+    static Node root;
+    void Print(Node node, int k1, int k2) 
+        if (node == null) {
+            return;
+        }
+        if (k1 < node.data) {
+            Print(node.left, k1, k2);
+        }
+        if (k1 <= node.data && k2 >= node.data) {
+            System.out.print(node.data + " ");
+        }
+         Print(node.right, k1, k2);
+    }
+     
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        int k1 = 10, k2 = 25;
+        tree.root = new Node(20);
+        tree.root.left = new Node(8);
+        tree.root.right = new Node(22);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(12);
+ 
+        tree.Print(root, k1, k2);
+    }
+}
